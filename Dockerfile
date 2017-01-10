@@ -1,16 +1,26 @@
-FROM alpine:3.4
+FROM ubuntu:16.04
 
-RUN apk update && \
-    apk add --no-cache git nodejs && \
-    npm i -g node-red && \
-    git clone --branch node-red-contrib-wsn https://github.com/ADVANTECH-Corp/docker-igw-app-x86.git /home/adv/node-red-contrib-wsn && \
-    /bin/mv /home/adv/node-red-contrib-wsn/node-red-contrib-wsn /usr/lib/node_modules/node-red/node_modules/. && \
-    /bin/rm -rf /home/adv/node-red-contrib-wsn/ && \
-    apk del git && rm -rf /tmp/* /var/cache/apk/*
-    
-#Setting docker port and run node-red
-EXPOSE 1880
+#wsn-simulator
+
+#MAINTAINER Advantech
 
 WORKDIR /home/adv
-# Run Node-red
-CMD ["/usr/bin/node-red"]
+# update and install dev-tools 
+RUN apt-get update &&\
+    apt-get install -y git-core && \
+    apt-get install -y vim && \
+    apt-get install -y sudo && \
+    useradd -m -k /home/adv adv -p adv -s /bin/bash -G sudo && \
+    echo "adv ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    git clone --branch wisesnail-lib-v2.0.1 https://github.com/ADVANTECH-Corp/docker-igw-app-x86.git . && \
+    ./install_wisesnaillib.sh && \
+    rm -rf sample inc lib *.* ./.git && \
+    git clone --branch wsn-simulator-v2.0.1 https://github.com/ADVANTECH-Corp/docker-igw-app-x86.git ./wsn-simulator && \
+    cp -r ./wsn-simulator/*.* ./wsn-simulator/wsn ./wsn-simulator/wisesim . && \
+    rm -rf ./wsn-simulator && \
+    apt-get autoremove --purge -y git-core
+
+#USER adv
+
+# Run WSN Simulator  Service
+ENTRYPOINT ["./wisesim"]
