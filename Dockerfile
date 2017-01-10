@@ -12,4 +12,4 @@ RUN apk update && \
     /bin/rm -rf ./wsn-simulator && \
     apk del git && rm -rf /tmp/* /var/cache/apk/*
   
-ENTRYPOINT ["./wisesim"]
+#ENTRYPOINT ["./wisesim"]
