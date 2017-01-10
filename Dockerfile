@@ -12,5 +12,4 @@ RUN apk update && \
     /bin/rm -rf ./wsn-simulator && \
     apk del git && rm -rf /tmp/* /var/cache/apk/*
   
-# Run Node-red
-#MD ["/usr/bin/node-red"]
+ENTRYPOINT ["./wisesim"]
