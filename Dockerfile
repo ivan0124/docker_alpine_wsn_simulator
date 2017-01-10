@@ -18,7 +18,7 @@ RUN apt-get update &&\
     git clone --branch wsn-simulator-v2.0.1 https://github.com/ADVANTECH-Corp/docker-igw-app-x86.git ./wsn-simulator && \
     cp -r ./wsn-simulator/*.* ./wsn-simulator/wsn ./wsn-simulator/wisesim . && \
     rm -rf ./wsn-simulator && \
-    apt-get uninstall -y git-core
+    apt-get uninstall git-core
 
 #USER adv
 
