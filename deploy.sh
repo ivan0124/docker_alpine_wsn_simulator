@@ -1,5 +1,5 @@
 #!/bin/bash
-DOCKER_API_GW_IMAGE=ivan0124tw/docker_alpine_wsn_simulator:20170110
+DOCKER_API_GW_IMAGE=ivan0124tw/docker_alpine_wsn_simulator
 DOCKER_API_GW_CONTAINER=wsn-simulator
 ADVANTECH_NET=advigw_network
 
