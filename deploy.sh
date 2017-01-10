@@ -1,5 +1,5 @@
 #!/bin/bash
-DOCKER_API_GW_IMAGE=advigw4x86/wsn-simulator
+DOCKER_API_GW_IMAGE=ivan0124tw/docker_alpine_wsn_simulator:20170110
 DOCKER_API_GW_CONTAINER=wsn-simulator
 ADVANTECH_NET=advigw_network
 
@@ -46,10 +46,10 @@ echo "======================================="
 echo "[Step5]: Run container images......"
 echo "======================================="
 #For release
-sudo docker run -it --name $DOCKER_API_GW_CONTAINER $DOCKER_API_GW_IMAGE /bin/bash
+#sudo docker run -itd --name $DOCKER_API_GW_CONTAINER $DOCKER_API_GW_IMAGE
 
 #For develop
-#sudo docker run -it --name $DOCKER_API_GW_CONTAINER -p 1880:1880 $DOCKER_API_GW_IMAGE /bin/bash
+sudo docker run -it --name $DOCKER_API_GW_CONTAINER $DOCKER_API_GW_IMAGE /bin/bash
 
 
 #join to user-defined network advigw_network
