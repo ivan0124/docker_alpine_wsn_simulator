@@ -9,8 +9,8 @@ RUN apk update && \
     apk del git && rm -rf /tmp/* /var/cache/apk/*
     
 #Setting docker port and run node-red
-EXPOSE 1880
+#EXPOSE 1880
 
 WORKDIR /home/adv
 # Run Node-red
-CMD ["/usr/bin/node-red"]
+#MD ["/usr/bin/node-red"]
