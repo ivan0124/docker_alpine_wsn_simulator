@@ -1,7 +1,7 @@
 FROM alpine:3.4
 
 RUN apk update && \
-    apk add --no-cache git nodejs && \
+    apk add --no-cache git bash nodejs && \
     npm i -g node-red && \
     git clone --branch node-red-contrib-wsn https://github.com/ADVANTECH-Corp/docker-igw-app-x86.git /home/adv/node-red-contrib-wsn && \
     /bin/mv /home/adv/node-red-contrib-wsn/node-red-contrib-wsn /usr/lib/node_modules/node-red/node_modules/. && \
