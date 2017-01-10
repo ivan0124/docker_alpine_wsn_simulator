@@ -1,16 +1,16 @@
 FROM alpine:3.4
 
-RUN apk update && \
-    apk add --no-cache git bash nodejs && \
-    npm i -g node-red && \
-    git clone --branch node-red-contrib-wsn https://github.com/ADVANTECH-Corp/docker-igw-app-x86.git /home/adv/node-red-contrib-wsn && \
-    /bin/mv /home/adv/node-red-contrib-wsn/node-red-contrib-wsn /usr/lib/node_modules/node-red/node_modules/. && \
-    /bin/rm -rf /home/adv/node-red-contrib-wsn/ && \
-    apk del git && rm -rf /tmp/* /var/cache/apk/*
-    
-#Setting docker port and run node-red
-#EXPOSE 1880
-
 WORKDIR /home/adv
+
+RUN apk update && \
+    apk add --no-cache git bash && \
+    git clone --branch wisesnail-lib-v2.0.1 https://github.com/ADVANTECH-Corp/docker-igw-app-x86.git . && \
+    ./install_wisesnaillib.sh && \
+    /bin/rm -rf sample inc lib *.* ./.git && \
+    git clone --branch wsn-simulator-v2.0.1 https://github.com/ADVANTECH-Corp/docker-igw-app-x86.git ./wsn-simulator && \
+    /bin/cp -r ./wsn-simulator/*.* ./wsn-simulator/wsn ./wsn-simulator/wisesim . && \
+    /bin/rm -rf ./wsn-simulator && \
+    apk del git && rm -rf /tmp/* /var/cache/apk/*
+  
 # Run Node-red
 #MD ["/usr/bin/node-red"]
